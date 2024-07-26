@@ -13,8 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 // Pass class as param is needed when directory for tests has different name
 @SpringBootTest(classes = MvcTestingExampleApplication.class)
@@ -70,5 +69,23 @@ public class ApplicationExampleTest {
         assertNotEquals(0, studentGrades.addGradeResultsForSingleClass(
                 student.getStudentGrades().getMathGradeResults()
         ));
+    }
+
+    @DisplayName("Is grade greater")
+    @Test
+    public void isGradeGreaterStudentGrades() {
+        assertTrue(studentGrades.isGradeGreater(90, 75), "failure - should be true");
+    }
+
+    @DisplayName("Is grade greater false")
+    @Test
+    public void isGradeGreaterStudentGradesAssertFalse() {
+        assertFalse(studentGrades.isGradeGreater(89, 92), "failure - should be false");
+    }
+
+    @DisplayName("Check Null for student grades")
+    @Test
+    public void checkNullForStudentGrades() {
+        assertNotNull(studentGrades.checkNull(student.getStudentGrades().getMathGradeResults()), "object should not to be null");
     }
 }
